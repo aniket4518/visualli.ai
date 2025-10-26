@@ -1,4 +1,4 @@
- 
+"use client"
 import React from "react"
 import { Home } from "lucide-react" 
 import AiFlowchart from "@/components/a-iflowchart" // import component
