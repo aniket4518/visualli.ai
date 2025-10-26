@@ -51,7 +51,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 		return null
 	}
 
-	// Path root -> id
+	// Path root id
 	function getNodePath(node: FlowNode, id: string, path: FlowNode[] = []): FlowNode[] {
 		if (!node) return []
 		if (node.id === id) return [...path, node]
@@ -73,8 +73,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 		const node = findNodeById(tree, selectedId)
 		return node ? node.color : "#000"
 	}
-
-	// Compute nodes to show
+ 
 	function getNodesToShow(): FlowNode[] {
 		const canvas = canvasRef.current
 		if (!canvas) return []
@@ -100,7 +99,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 			}))
 		}
 
-		// Otherwise show parent's children (siblings), 
+		// Otherwise show parent's children (siblings) 
 		const path = getNodePath(tree, nodeToCheck.id)
 		if (path.length >= 2) {
 			const parent = path[path.length - 2]
@@ -114,12 +113,11 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 				}))
 			}
 		}
-
-		// Fallback to root
+ 
 		return [{ ...tree, x: centerX, y: centerY }]
 	}
 
-	// Draw single node
+	// Draw single 
 	function drawNode(ctx: CanvasRenderingContext2D, node: FlowNode, nodeScale = 1, nodeFade = 1) {
 		const radius = 60 * nodeScale
 		ctx.save()
@@ -148,7 +146,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 	 
 	}, [canvasRef.current, currentNode, selectedId, tree])
 
-	// Resize canvas backing store
+	// Resize canvas 
 	useEffect(() => {
 		const canvas = canvasRef.current
 		if (!canvas) return
@@ -247,16 +245,16 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 
 		// backward: if a node was selected (forward anim target)
 		if (selectedId) {
-			// If children are already shown, treat click as "close children" — go one level up to the selected node
+			// If children are already shown, treat click as close children and go one level up to the selected node
 			if (showChildren) {
 				setSelectedId(null)
 				setShowChildren(false)
 				setAnimating(false)
-				// refresh visible nodes immediately
+				// refresh visible nodes  
 				setNodes(getNodesToShow())
 				return
 			}
-			// If children are not yet shown (during forward animation), move up to parent of the selected node
+			// If children are not yet shown   move up to parent of the selected node
 			const path = getNodePath(tree, selectedId)
 			if (path.length >= 2) {
 				const parent = path[path.length - 2]
@@ -267,7 +265,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 				return
 			}
 		}
-		// if no selection, but currentNode has parent, move up
+		// if no selection  but currentNode has parent then move up
 		if (currentNode && currentNode.parentId) {
 			const path = getNodePath(tree, currentNode.id)
 			if (path.length >= 2) {
@@ -286,7 +284,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 		setAnimating(false)
 	}
 
-	// Add goHome handler  
+	// goHome handler  
 	function goHome() {
 		setCurrentNode(tree)
 		setSelectedId(null)
@@ -303,7 +301,7 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 				aria-label="Go to root"
 				className="fixed top-5 left-2 h-20 w-20 z-50 flex items-center justify-center rounded-full cursor-pointer "
 			> 
-				{/* use local HomeIcon */}
+				 
 				<HomeIcon size={28} className="text-white" />
 			</button>
 

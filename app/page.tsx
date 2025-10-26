@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import AiFlowchart from "@/components/a-iflowchart" // import component
+import AiFlowchart from "@/components/a-iflowchart"  
 
 export default function Flowchar() {
 	interface FlowNode {
@@ -15,7 +15,7 @@ export default function Flowchar() {
 		y?: number
 	}
 
-	// Initial node with children (positions will be recalculated)
+	// Initial node with children 
 	const initialNode: FlowNode = {
 		id: "n1",
 		label: "Root",
@@ -94,7 +94,7 @@ export default function Flowchar() {
 		]
 	}
 
-	// Add parentId to every node in the example tree for perfect tracking
+	 
 	function addParentIds(node: any, parentId?: string): any {
 		const newNode = { ...node, parentId }
 		if (node.children) {
