@@ -1,6 +1,5 @@
 "use client"
 import React, { useRef, useEffect, useState } from "react"
-import { Home } from "lucide-react" 
 
 type FlowNode = {
 	id: string
@@ -13,6 +12,19 @@ type FlowNode = {
 	x?: number
 	y?: number
 }
+
+const HomeIcon = ({ size = 28, className = "" }: { size?: number; className?: string }) => (
+	<svg
+		width={size}
+		height={size}
+		viewBox="0 0 24 24"
+		fill="currentColor"
+		xmlns="http://www.w3.org/2000/svg"
+		className={className}
+	>
+		<path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z" />
+	</svg>
+)
 
 export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -291,7 +303,8 @@ export default function AiFlowchart({ tree }: { tree: FlowNode }) {
 				aria-label="Go to root"
 				className="fixed top-5 left-2 h-20 w-20 z-50 flex items-center justify-center rounded-full cursor-pointer "
 			> 
-				<Home size={28} className="text-white" />
+				{/* use local HomeIcon */}
+				<HomeIcon size={28} className="text-white" />
 			</button>
 
 			<canvas
